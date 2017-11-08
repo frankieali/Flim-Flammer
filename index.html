@@ -1,0 +1,449 @@
+<!doctype html>
+<html class="no-js" lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta http-equiv="Content-Language" content="en">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Flim Flammer</title>
+    <!--<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">-->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/3.3.5/spacelab/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/5.2.3/css/bootstrap-slider.min.css">
+    <link rel="stylesheet" href="assets/css/styles.css">
+
+
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/5.2.3/bootstrap-slider.min.js"></script>
+    <script src="assets/js/script.js"></script>
+</head>
+<body>
+    <div id="body-wrapper">
+        <!-- FIXED BACKGROUND IMAGE -->
+        <div id="page-bg"></div>
+        <h1 class="text-center">Flim Flammer</h1>
+        <p class="text-center lead"><small>D&amp;D 5e Challenge Rating Calculator</small></p>
+        <hr />
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div id="mob-type" class="form-group">
+                        <strong>Type: </strong>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" autocomplete="off" value="melee" checked />
+                                Melee
+                            </label>
+                        </div>
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="type" autocomplete="off" value="caster" />
+                                Caster
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div id="lock" class="form-group">
+                        <strong>Lock: </strong>
+                        <div class="checkbox">
+                            <label>
+                                <input id="lock-hp" type="checkbox" autocomplete="off" value="hp" />
+                                Lock on Hit Points
+                            </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                <input id="lock-dpr" type="checkbox" autocomplete="off" value="dpr" />
+                                Lock on Damage Per Round
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-md-5 col-md-push-7">
+                    <div class="well">
+                        <div><span class="lead">Challenge Rating: <strong id="cr-val">0</strong></span></div>
+                        <div><span class="lead">Experience Value: <strong id="exp-val">0</strong></span></div>
+                    </div>
+                </div>
+                <div class="col-md-7 col-md-pull-5">
+                    <form id="stats">
+                        <div class="form-group">
+                            <label for="pb">Proficiency Bonus:</label>
+                            <input id="pb" class="form-control" type="text" data-slider-min="-3" data-slider-max="9" data-slider-step="1" data-slider-value="2" data-slider-enabled="false"/>
+                            <span id="pb-val">2</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="ac">Armor Class:</label>
+                            <input id="ac" class="form-control" type="text" data-slider-min="8" data-slider-max="19" data-slider-step="1" data-slider-value="13"/>
+                            <span id="ac-val">13</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="hp">Hit Points:</label>
+                            <input id="hp" class="form-control" type="text" data-slider-min="1" data-slider-max="850" data-slider-step="1" data-slider-value="1"/>
+                            <span id="hp-val">1</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="ab">Attack Bonus:</label>
+                            <input id="ab" class="form-control" type="text" data-slider-min="-2" data-slider-max="14" data-slider-step="1" data-slider-value="3"/>
+                            <span id="ab-val">3</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="dpr">Damage Per Round:</label>
+                            <input id="dpr" class="form-control" type="text" data-slider-min="0" data-slider-max="320" data-slider-step="1" data-slider-value="0"/>
+                            <span id="dpr-val">0</span>
+                        </div>
+                        <div class="form-group">
+                            <label for="save">Save DC:</label>
+                            <input id="save" class="form-control" type="text" data-slider-min="8" data-slider-max="23" data-slider-step="1" data-slider-value="13" data-slider-enabled="false"/>
+                            <span id="save-val">13</span>
+                        </div>
+                    </form>
+                    <hr />
+
+                    <a class="btn btn-primary" id="btn-vri" data-toggle="collapse" href="#VRI" aria-expanded="false" aria-controls="VRI">
+                        Damage Vulnerabilities, Resistances, and Immunities
+                    </a>
+                    <div class="collapse" id="VRI">
+                        <div class="well">
+                            <form class="form-horizontal">
+                                <div class="form-group">
+                                    <strong>Bludgeoning: </strong>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="vri-1" autocomplete="off" checked /> None
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="vri-1" autocomplete="off" /> Vulnerable
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="vri-1" autocomplete="off" /> Resistant
+                                        </label>
+                                        <label class="btn btn-success">
+                                            <input type="radio" name="vri-1" autocomplete="off" /> Immune
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <strong>Piercing: </strong>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="vri-2" autocomplete="off" checked /> None
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="vri-2" autocomplete="off" /> Vulnerable
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="vri-2" autocomplete="off" /> Resistant
+                                        </label>
+                                        <label class="btn btn-success">
+                                            <input type="radio" name="vri-2" autocomplete="off" /> Immune
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <strong>Slashing: </strong>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="vri-3" autocomplete="off" checked /> None
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="vri-3" autocomplete="off" /> Vulnerable
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="vri-3" autocomplete="off" /> Resistant
+                                        </label>
+                                        <label class="btn btn-success">
+                                            <input type="radio" name="vri-3" autocomplete="off" /> Immune
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <strong>Acid: </strong>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="vri-4" autocomplete="off" checked /> None
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="vri-4" autocomplete="off" /> Vulnerable
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="vri-4" autocomplete="off" /> Resistant
+                                        </label>
+                                        <label class="btn btn-success">
+                                            <input type="radio" name="vri-4" autocomplete="off" /> Immune
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <strong>Cold: </strong>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="vri-5" autocomplete="off" checked /> None
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="vri-5" autocomplete="off" /> Vulnerable
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="vri-5" autocomplete="off" /> Resistant
+                                        </label>
+                                        <label class="btn btn-success">
+                                            <input type="radio" name="vri-5" autocomplete="off" /> Immune
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <strong>Fire: </strong>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="vri-6" autocomplete="off" checked /> None
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="vri-6" autocomplete="off" /> Vulnerable
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="vri-6" autocomplete="off" /> Resistant
+                                        </label>
+                                        <label class="btn btn-success">
+                                            <input type="radio" name="vri-6" autocomplete="off" /> Immune
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <strong>Force: </strong>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="vri-7" autocomplete="off" checked /> None
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="vri-7" autocomplete="off" /> Vulnerable
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="vri-7" autocomplete="off" /> Resistant
+                                        </label>
+                                        <label class="btn btn-success">
+                                            <input type="radio" name="vri-7" autocomplete="off" /> Immune
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <strong>Lightning: </strong>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="vri-8" autocomplete="off" checked /> None
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="vri-8" autocomplete="off" /> Vulnerable
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="vri-8" autocomplete="off" /> Resistant
+                                        </label>
+                                        <label class="btn btn-success">
+                                            <input type="radio" name="vri-8" autocomplete="off" /> Immune
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <strong>Necrotic: </strong>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="vri-9" autocomplete="off" checked /> None
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="vri-9" autocomplete="off" /> Vulnerable
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="vri-9" autocomplete="off" /> Resistant
+                                        </label>
+                                        <label class="btn btn-success">
+                                            <input type="radio" name="vri-9" autocomplete="off" /> Immune
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <strong>Poison: </strong>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="vri-10" autocomplete="off" checked /> None
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="vri-10" autocomplete="off" /> Vulnerable
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="vri-10" autocomplete="off" /> Resistant
+                                        </label>
+                                        <label class="btn btn-success">
+                                            <input type="radio" name="vri-10" autocomplete="off" /> Immune
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <strong>Psychic: </strong>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="vri-11" autocomplete="off" checked /> None
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="vri-11" autocomplete="off" /> Vulnerable
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="vri-11" autocomplete="off" /> Resistant
+                                        </label>
+                                        <label class="btn btn-success">
+                                            <input type="radio" name="vri-11" autocomplete="off" /> Immune
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <strong>Radient: </strong>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="vri-12" autocomplete="off" checked /> None
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="vri-12" autocomplete="off" /> Vulnerable
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="vri-12" autocomplete="off" /> Resistant
+                                        </label>
+                                        <label class="btn btn-success">
+                                            <input type="radio" name="vri-12" autocomplete="off" /> Immune
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <strong>Thunder: </strong>
+                                    <div class="btn-group" data-toggle="buttons">
+                                        <label class="btn btn-default active">
+                                            <input type="radio" name="vri-13" autocomplete="off" checked /> None
+                                        </label>
+                                        <label class="btn btn-danger">
+                                            <input type="radio" name="vri-13" autocomplete="off" /> Vulnerable
+                                        </label>
+                                        <label class="btn btn-info">
+                                            <input type="radio" name="vri-13" autocomplete="off" /> Resistant
+                                        </label>
+                                        <label class="btn btn-success">
+                                            <input type="radio" name="vri-13" autocomplete="off" /> Immune
+                                        </label>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!--
+                    <hr />
+                    <a class="btn btn-primary" data-toggle="collapse" href="#features" aria-expanded="false" aria-controls="features">
+                        Monster Features
+                    </a>
+                    <div class="collapse" id="features">
+                        <div class="well">
+                            <form>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="dpr:1" />
+                                        <b>Aggressive:</b> Increases the monster's effective <i><b>per-round damage</b></i> output by 2
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="ac:1" />
+                                        <b>Ambusher:</b> Increases the monster's effective <i><b>attack bonus</b></i> by 1
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="ac:1" />
+                                        <b>Avoidance:</b> Increases the monster's effective <i><b>AC</b></i> by 1
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="ab:4" />
+                                        <b>Blood Frenzy:</b> Increases the monster's effective <i><b>attack bonus</b></i> by 4
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="ac:1" />
+                                        <b>Constrict:</b> Increases the monster's effective <i><b>AC</b></i> by 1
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="special:dt">
+                                        <b>Damage Transfer:</b> Double the monster's effective <i><b>hit points</b></i>. Add one-third of the monster's hit points to its <i><b>per-round damage</b></i>.
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="special:fp">
+                                        <b>Frightful Presence:</b> Increase the monster's effective <i><b>hit points</b></i> by 25% if the monster is meant to face characters of 1Oth level or lower.
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="ac:2" />
+                                        <b>Magic Resistance:</b> Increase the monster's effective <i><b>AC</b></i> by 2
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="ac:4,ab:4" />
+                                        <b>Nimble Escape:</b> Increase the monster's effective <i><b>AC</b></i> and effective <i><b>attack bonus</b></i> by 4 (assuming the monster hides every round).
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="ab:1" />
+                                        <b>Pack Tactics:</b> Increase the monster's effective <i><b>attack bonus</b></i> by 1
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="ac:1" />
+                                        <b>Parry:</b> Increase the monster's effective <i><b>AC</b></i> by 1
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="hp:x2" />
+                                        <b>Possession:</b> Double the monster's effective <i><b>hit points</b></i>
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="dpr:2" />
+                                        <b>Rampage:</b> Increase the monster's effective <i><b>per-round damage</b></i> by 2
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="ac:1" />
+                                        <b>Stench:</b> Increase the monster's effective <i><b>AC</b></i> by 1
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="ac:2" />
+                                        <b>Superior Invisibility:</b> Increase the monster's effective <i><b>AC</b></i> by 2
+                                    </label>
+                                </div>
+                                <div class="checkbox">
+                                    <label>
+                                        <input type="checkbox" value="ac:1" />
+                                        <b>Web:</b> Increase the monster's effective <i><b>AC</b></i> by 1
+                                    </label>
+                                </div>
+                            </form>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

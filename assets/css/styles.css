@@ -1,0 +1,27 @@
+#body-wrapper {
+    margin-bottom:40px;
+}
+label,.form-group strong {
+    display:block;
+}
+#stats .form-group {
+    position: relative;
+    padding-right:40px;
+}
+#stats .form-group span {
+    display: block;
+    position: absolute;
+    top:26px;
+    right:0;
+    width: 25px;
+    font-weight: bold;
+}
+.disabled label {
+    color:#ccc;
+}
+.slider.slider-horizontal {
+    width:100%;
+}
+#btn-vri {
+    white-space: normal;
+}

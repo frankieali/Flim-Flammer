@@ -1,0 +1,29 @@
+{
+  "name": "flim-flammer",
+  "version": "0.1.0",
+  "description": "allow you to throttle hop mobs by various traits",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "dnd",
+    "5e",
+    "utilities"
+  ],
+  "author": "Frank Ali",
+  "license": "ISC",
+  "devDependencies": {
+    "autoprefixer": "*",
+    "gulp": "*",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-bower": "*",
+    "gulp-concat": "*",
+    "gulp-jshint": "*",
+    "gulp-livereload": "*",
+    "gulp-plumber": "*",
+    "gulp-sass": "*",
+    "gulp-sourcemaps": "*",
+    "gulp-uglify": "^1.4.2"
+  }
+}
